@@ -20,9 +20,9 @@ def compute_meta_summary():
     ci_high = weighted_mean + 1.96 * np.sqrt(weighted_var)
 
     return jsonify({
-        "summary_effect": weighted_mean,
-        "95CI": [ci_low, ci_high],
-        "variance": weighted_var
+        "summary_effect": float(weighted_mean),
+        "95CI": [float(ci_low), float(ci_high)],
+        "variance": float(weighted_var)
     })
 
 @app.route("/meta/heterogeneity", methods=["POST"])
@@ -38,9 +38,9 @@ def compute_heterogeneity():
     p_value = 1 - stats.chi2.cdf(Q, df)
 
     return jsonify({
-        "Q": Q,
+        "Q": float(Q),
         "degrees_of_freedom": df,
-        "p_value": p_value
+        "p_value": float(p_value)
     })
 
 if __name__ == "__main__":
